@@ -31,9 +31,9 @@ class TaskController extends Controller
     public function create(int $id, CreateTask $request){
         $current_folder = Folder::find($id);
 
-        $task = Task::new();
+        $task = new Task();
         $task->title = $request->title;
-        $task->due_date = $request->due_date();
+        $task->due_date = $request->due_date;
 
         $current_folder->tasks()->save($task);
 
