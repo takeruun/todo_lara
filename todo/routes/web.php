@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
 Route::post('/folders/create', 'FolderController@create');
 
