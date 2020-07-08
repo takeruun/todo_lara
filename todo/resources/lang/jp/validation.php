@@ -117,7 +117,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
-    'due' => ':attribute には日付を入力してください。',
+    'date' => ':attribute には日付を入力してください。',
 
     /*
     |--------------------------------------------------------------------------
