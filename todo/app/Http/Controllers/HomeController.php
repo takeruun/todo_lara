@@ -27,7 +27,6 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $folder = $user->folders()->first();
-
         // まだ一つもフォルダを作っていなければホームページをレスポンスする
         if (is_null($folder)) {
             return view('home');
@@ -35,7 +34,7 @@ class HomeController extends Controller
 
         // フォルダがあればそのフォルダのタスク一覧にリダイレクトする
         return redirect()->route('tasks.index', [
-            'id' => $folder->id,
+            'folder' => $folder->id,
         ]);
     }
 }
