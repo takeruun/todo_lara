@@ -13,8 +13,13 @@
   <nav class="my-navbar">
     <a class="my-navbar-brand" href="/">ToDo App</a>
     <div class="my-navbar-control">
+      <a class="my-navbar-item" href="{{route('calenders.index', ['year' => date('Y'), 'month' => date('m')])}}">カレンダー</a>
+    </div>
+    <div class="my-navbar-control">
       @if(Auth::check())
-        <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
+        <a href="{{route('users.index',['user' => Auth::user() ])}}">
+          <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
+        </a>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

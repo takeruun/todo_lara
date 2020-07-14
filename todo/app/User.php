@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetPassword;
 
+use App\Task;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -50,4 +52,12 @@ class User extends Authenticatable
     {
         Mail::to($this)->send(new ResetPassword($token));
     }
+
+    /**
+     * ユーザが持つ全てのタスク一覧
+     */
+    public function getAllTasks(){
+        return Task::whereIn('folder_id', $this->folders()->pluck('id')->toArray())->get();
+    }
+
 }
