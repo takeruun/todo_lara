@@ -82,4 +82,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## カレンダー機能付けたった
 
-## タスクを反映したお
+## タスクを反映した
