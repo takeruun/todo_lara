@@ -13,6 +13,9 @@
   <nav class="my-navbar">
     <a class="my-navbar-brand" href="/">ToDo App</a>
     <div class="my-navbar-control">
+      <a class="my-navbar-item" href="{{route('calenders.index', ['year' => date('Y'), 'month' => date('m')])}}">カレンダー</a>
+    </div>
+    <div class="my-navbar-control">
       @if(Auth::check())
         <a href="{{route('users.index',['user' => Auth::user() ])}}">
           <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>

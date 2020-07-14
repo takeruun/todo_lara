@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users/{user}', 'UserController@index')->name('users.index');
     Route::get('/users/{user}/edit', 'UserController@showEditForm')->name('users.edit');
     Route::post('/users/{user}/edit', 'UserController@edit');
+
+    Route::get('/calenders/{year}/{month}', 'CalenderController@index')->name('calenders.index');
 });
 
 Auth::routes();
