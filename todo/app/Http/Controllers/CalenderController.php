@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CalenderController extends Controller
 {
-    public function index(int $year, String $month){
+    public function index(int $year, int $month){
         $day_info = new Carbon("$year-$month-01");
         $first_week = $day_info->dayOfWeek;
         $days_in_month = $day_info->daysInMonth;
@@ -80,11 +80,17 @@ class CalenderController extends Controller
             $day_count++;
         }
 
-        for($i = 0; $i < 7 - count($weeks[count($weeks)-1]); $i++) array_push($weeks[count($weeks)-1], '<p class="next">'. ($i + 1). '</p>');
+        $num = count($weeks[count($weeks)-1]);
+        for($i = 1; $i <= 7 - $num; $i++) array_push($weeks[count($weeks)-1], '<p class="next">'. $i. '</p>');
         
+        $all_tasks = Auth::user()->getAllTasks();
+
         return view('calenders/index', [
             'weeks' => $weeks,
-            'today_info' => Carbon::now()->format('Y-m-j'),
+            'today_info' => Carbon::now()->format('Y-n-j'),
+            'year' => $year,
+            'month' => $month,
+            'all_tasks' => $all_tasks,
         ]);
     }
 }

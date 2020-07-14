@@ -34,6 +34,6 @@ class Task extends Model
      * @return string
      */
     public function getFormattedDueDateAttribute(){
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['due_date'])->format('Y/m/d');
+        return Carbon::createFromFormat('Y-n-j', $this->attributes['due_date'])->format('Y/n/j');
     }
 }

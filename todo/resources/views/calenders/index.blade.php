@@ -24,18 +24,28 @@
             @foreach ($weeks as $week)
               <tr>
                 @foreach ($week as $day)
-                  @if (date('Y').'-'.date('m').'-'.strip_tags($day) == $today_info)
-                    <td class="today">{!! $day !!}
-                    </td>
+                  @if ($year.'-'.$month.'-'.strip_tags($day) == $today_info)
+                    <td class="today">
                   @else
-                    <td>{!! $day !!}
-                    </td>
+                    <td>
                   @endif
+                      {!! $day !!}
+                    @foreach ($all_tasks as $task)
+                      @if ($year.'/'.$month.'/'.strip_tags($day) == $task->formatted_due_date)
+                        <div>{{ $task->title }}</div>
+                      <a href="{{ route('tasks.edit', ['folder' => $task->folder_id, 'task' => $task->id] ) }}">編集</a>
+                      @endif
+                    @endforeach
+                    </td>
                 @endforeach
               </tr>
             @endforeach
           </thead>
         </table>
+        <div class="switch-calender">
+          <span class="select-prev"><a href="{{ route('calenders.index', ['year' => $year, 'month' => $month-1 ]) }}">前月</a></span>
+          <span class="select-prev"><a href="{{ route('calenders.index', ['year' => $year, 'month' => $month+1 ]) }}">後月</a></span>
+        </div>
       </div>
     </div>
 @endsection
