@@ -51,43 +51,56 @@ class CalenderController extends Controller
         }
         */
         $week = [];
-        $day_tag = '';
+        $day_info = array();
         $day = 1;
         for($i = 0; $i < 7; $i++){
             if($i < $first_week){
-                $day_tag .='<p class="prev">'. $add_day. '</p>';
+                $day_info = array(
+                    'date' => $year.'/'.($month-1).'/'.$add_day,
+                    'tag' => '<p class="prev">'. $add_day. '</p>',
+                );
                 $add_day++;
             }else{
-                $day_tag .='<p class="now">'. $day. '</p>';
+                $day_info = array(
+                    'date' => $year.'/'.$month.'/'.$day,
+                    'tag' => '<p class="now">'. $day. '</p>',
+                );
                 $day++;
             }
-            array_push($week, $day_tag);
-            $day_tag = '';
+            array_push($week, $day_info);
         }
         array_push($weeks, $week);
 
         $day_count = 1;
         $week = [];
-        $day_tag = '';
+        
         for($day = 7 - $first_week + 1; $day <= $days_in_month; $day++){
-            $day_tag .= '<p class="now">'. $day. '</p>';
-            array_push($week, $day_tag);
+            $day_info = array(
+                'date' => $year.'/'.$month.'/'.$day,
+                'tag' => '<p class="now">'. $day. '</p>',
+            );
+            array_push($week, $day_info);
             if($day_count % 7 == 0 || $day == $days_in_month){
                 array_push($weeks, $week);
                 $week = [];
             }
-            $day_tag = '';
             $day_count++;
         }
 
         $num = count($weeks[count($weeks)-1]);
-        for($i = 1; $i <= 7 - $num; $i++) array_push($weeks[count($weeks)-1], '<p class="next">'. $i. '</p>');
-        
+        for($i = 1; $i <= 7 - $num; $i++) {
+            $day_info = array(
+                'date' => $year.'/'.($month+1).'/'.$i,
+                'tag' => '<p class="next">'. $i. '</p>',
+            );
+            array_push($weeks[count($weeks)-1], $day_info);
+        }
+
         $all_tasks = Auth::user()->getAllTasks();
 
         return view('calenders/index', [
             'weeks' => $weeks,
-            'today_info' => Carbon::now()->format('Y-n-j'),
+            'today_info' => Carbon::now()->format('Y/n/j'),
             'year' => $year,
             'month' => $month,
             'all_tasks' => $all_tasks,
