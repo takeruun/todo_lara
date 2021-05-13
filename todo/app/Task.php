@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
     /**
      * 状態定義
      */
