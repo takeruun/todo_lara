@@ -48,9 +48,11 @@ class TaskController extends Controller
     }
 
     public function showEditForm(Folder $folder, Task $task){
+        $comments = $task->comments();
 
         return view('tasks/edit', [
             'task' => $task, 
+            'comments' => $comments
         ]);
     }
 

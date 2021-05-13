@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/folders/{folder}/tasks/create', 'TaskController@create');
         Route::get('/folders/{folder}/tasks/{task}/edit', 'TaskController@showEditForm')->name('tasks.edit');
         Route::post('/folders/{folder}/tasks/{task}/edit', 'TaskController@edit');
+
+        Route::post('/folders/{folder}/tasks/{task}/comment/create', 'CommentController@create');
     });
 
     Route::get('/users/{user}', 'UserController@index')->name('users.index');

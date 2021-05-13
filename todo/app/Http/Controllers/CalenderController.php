@@ -97,7 +97,7 @@ class CalenderController extends Controller
         }
 
         $all_tasks = Auth::user()->getAllTasks();
-
+        
         return view('calenders/index', [
             'weeks' => $weeks,
             'today_info' => Carbon::now()->format('Y/n/j'),
